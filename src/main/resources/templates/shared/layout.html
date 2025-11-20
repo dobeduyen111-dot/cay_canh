@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
+<head>
+    <title layout:fragment="title">Tree</title>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/homeindex.css">
+    <script src="/js/jquery-3.7.1.js"></script>
+    <link rel="shortcut icon" href="/Images/favicon.png" type="image/x-icon">
+</head>
+<title layout:fragment="title">Trang chủ</title>
+<body>
+    <div class="topbar">
+    <div class="container topbar-inner">
+        <div class="left">
+            <span class="icon">⏱</span> 08:30 - 22:00
+            <span class="sep">|</span>
+            <span class="icon">📞</span> 0838 369 639 - 09 6688 9393
+        </div>
+
+        <div class="right">
+            <a href="/wishlist">
+                <span class="icon">🤍</span>
+            </a>
+            <span class="sep">|</span>
+            <span th:if="${loggedName == null}">
+                <a href="/auth/login" class="login">Login</a>
+            </span>
+            <span th:if="${loggedName != null}">
+                👋 <b th:text="${loggedName}"></b>
+                <span class="sep">|</span>
+            <form th:action="@{/auth/logout}" method="post">
+                <a href="/auth/logout">Logout</a>
+            </form>
+            </span>
+        </div>
+    </div>
+</div>
+
+<!-- ===== MAIN HEADER ===== -->
+<header class="main-header">
+    <div class="container header-inner">
+        <div class="logo">
+            <img src="https://mowgarden.com/wp-content/uploads/2022/07/logo-mow-green.png" alt="MOW Logo">
+        </div>
+        <nav class="menu">
+            <ul class="menu-list">
+                <li class="menu-item has-mega">
+                    <a href="#">Cây trong nhà ▼</a>
+                    <div class="mega-menu">
+                        <div class="mega-content">
+                            <div class="mega-col">
+                                <h3>Theo kiểu dáng cây</h3>
+                                <a href="#">> Cây Cao & Lớn</a>
+                                <a href="#">> Cây Cảnh Mini</a>
+                                <a href="#">> Cây Treo Trong Nhà</a>
+                                <a href="#">> Cây Nhiệt Đới</a>
+                                <a href="#">> Cây Kiểng Lá</a>
+                            </div>
+                            <div class="mega-col">
+                                <h3>Theo vị trí đặt</h3>
+                                <a href="#">> Cây Cảnh Để Bàn</a>
+                                <a href="#">> Cây Cảnh Văn Phòng</a>
+                                <a href="#">> Cây Trong Bếp & Tắm</a>
+                                <a href="#">> Cây Trước Cửa</a>
+                                <a href="#">> Cây Trồng Ban Công</a>
+                            </div>
+                            <div class="mega-col">
+                                <h3>Theo chức năng</h3>
+                                <a href="#">> Cây Lọc Không Khí</a>
+                                <a href="#">> Cây Dễ Trồng</a>
+                                <a href="#">> Cây Cần Ít Ánh Sáng</a>
+                                <a href="#">> Cây Thủy Sinh</a>
+                                <a href="#">> Cây Phong Thủy</a>
+                            </div>
+                            <div class="mega-col image-col">
+                                <img src="https://images.unsplash.com/photo-1470058869958-2a77ade41c02?q=80&w=500&auto=format&fit=crop" alt="MOW Garden">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="menu-item has-mega">
+                    <a href="#">Cây ngoài trời ▼</a>
+                    <div class="mega-menu">
+                        <div class="mega-content">
+                            <div class="mega-col">
+                                <h3>Cây Bóng Mát</h3>
+                                <a href="#">> Cây Bàng Singapore</a>
+                                <a href="#">> Cây Phát Tài Núi</a>
+                                <a href="#">> Cây Cau Cảnh</a>
+                                <a href="#">> Cây Chuối Cảnh</a>
+                            </div>
+                            <div class="mega-col">
+                                <h3>Cây Có Hoa</h3>
+                                <a href="#">> Hoa Giấy</a>
+                                <a href="#">> Hoa Hồng Leo</a>
+                                <a href="#">> Cây Sử Quân Tử</a>
+                                <a href="#">> Cây Nguyệt Quế</a>
+                            </div>
+                            <div class="mega-col">
+                                <h3>Cây Ăn Quả</h3>
+                                <a href="#">> Cây Chanh Vàng</a>
+                                <a href="#">> Cây Ổi Tím</a>
+                                <a href="#">> Cây Lựu Đỏ</a>
+                                <a href="#">> Cây Táo Mèo</a>
+                            </div>
+                            <div class="mega-col image-col">
+                                <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=500&auto=format&fit=crop" alt="Outdoor Plants">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="menu-item has-mega">
+                    <a href="#">Chậu cây ▼</a>
+                    <div class="mega-menu">
+                        <div class="mega-content">
+                            <div class="mega-col">
+                                <h3>Chất liệu</h3>
+                                <a href="#">> Chậu Đất Nung</a>
+                                <a href="#">> Chậu Gốm Sứ</a>
+                                <a href="#">> Chậu Xi Măng</a>
+                                <a href="#">> Chậu Composite</a>
+                                <a href="#">> Giỏ Mây Tre Đan</a>
+                            </div>
+                            <div class="mega-col">
+                                <h3>Kích thước</h3>
+                                <a href="#">> Chậu Mini (Để bàn)</a>
+                                <a href="#">> Chậu Cỡ Trung</a>
+                                <a href="#">> Chậu Đại (Cây lớn)</a>
+                                <a href="#">> Chậu Chữ Nhật</a>
+                            </div>
+                            <div class="mega-col">
+                                <h3>Phụ kiện chậu</h3>
+                                <a href="#">> Đĩa Lót Chậu</a>
+                                <a href="#">> Chân Đế Gỗ</a>
+                                <a href="#">> Giá Sắt Treo</a>
+                                <a href="#">> Sỏi Trang Trí</a>
+                            </div>
+                            <div class="mega-col image-col">
+                                <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=500&auto=format&fit=crop" alt="Pots">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="menu-item has-mega">
+                    <a href="#">Phụ kiện ▼</a>
+                    <div class="mega-menu">
+                        <div class="mega-content">
+                            <div class="mega-col">
+                                <h3>Đất & Phân Bón</h3>
+                                <a href="#">> Đất Sạch Hữu Cơ</a>
+                                <a href="#">> Phân Bón Lá</a>
+                                <a href="#">> Phân Tan Chậm</a>
+                                <a href="#">> Giá Thể Sen Đá</a>
+                            </div>
+                            <div class="mega-col">
+                                <h3>Dụng Cụ</h3>
+                                <a href="#">> Bình Tưới Cây</a>
+                                <a href="#">> Kéo Cắt Tỉa</a>
+                                <a href="#">> Xẻng Làm Vườn</a>
+                                <a href="#">> Găng Tay</a>
+                            </div>
+                            <div class="mega-col">
+                                <h3>Trang Trí</h3>
+                                <a href="#">> Tượng Mini</a>
+                                <a href="#">> Đèn Led Cho Cây</a>
+                                <a href="#">> Kệ Gỗ Decor</a>
+                                <a href="#">> Macrame Treo Cây</a>
+                            </div>
+                            <div class="mega-col image-col">
+                                <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?q=80&w=500&auto=format&fit=crop" alt="Accessories">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="menu-item">
+                    <a href="#">Hướng dẫn ▼</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="actions">
+            <div class="cart">
+                <span class="cart-count">0đ</span>
+                <span class="icon">🛒</span>
+            </div>
+            <span class="icon search-icon">🔍</span>
+        </div>
+    </div>
+</header>
+<section class="container-fluid" layout:fragment="content"></section>
+</body>
+</html>

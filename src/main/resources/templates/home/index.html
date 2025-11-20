@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en" 
+    layout:decorate="~{shared/layout}">
+<section layout:fragment="content" class="home-content">
+    <div class="hero-banner">
+        <div class="container hero-content-wrapper"> 
+            <div class="content-box">
+                <h1>Tận hưởng không gian sống xanh</h1>
+                <p>
+                    Bổ sung thêm cây xanh là một cách đơn giản nhất để tạo ra sự thoải mái cho không gian sống của bạn, giúp mang lại hiệu quả công việc và thư giãn mỗi khi trở về.
+                </p>
+                <div class="button-group">
+                    <a href="#" class="btn btn-outline">LIÊN HỆ</a>
+                    <a href="#" class="btn btn-filled">MUA NGAY</a>
+                </div>
+            </div>
+        </div>
+        <a href="tel:0123456789" class="floating-call-btn">
+            <i class="fas fa-phone-alt"></i>
+        </a>
+    </div>
+    <div class="categories-section">
+        <div class="container">
+            <h2>DANH MỤC SẢN PHẨM</h2>
+            <div class="category-grid">
+                <a href="#" class="category-item">
+                    <img src="/images/cay_de_cham.jpg" alt="Cây dễ chăm" class="category-img">
+                    <span class="category-label">CÂY DỄ CHĂM</span>
+                </a>
+                <a href="#" class="category-item">
+                    <img src="/images/cay_van_phong.jpg" alt="Cây văn phòng" class="category-img">
+                    <span class="category-label">CÂY VĂN PHÒNG</span>
+                </a>
+                <a href="#" class="category-item">
+                    <img src="/images/cay_phong_thuy.jpg" alt="Cây phong thủy" class="category-img">
+                    <span class="category-label">CÂY PHONG THỦY</span>
+                </a>
+                <a href="#" class="category-item">
+                    <img src="/images/cay_de_ban.jpg" alt="Cây để bàn" class="category-img">
+                    <span class="category-label">CÂY ĐỂ BÀN</span>
+                </a>
+                
+                <a href="#" class="category-item">
+                    <img src="/images/cay_trong_nuoc.jpg" alt="Cây trồng nước" class="category-img">
+                    <span class="category-label">CÂY TRỒNG NƯỚC</span>
+                </a>
+                <a href="#" class="category-item">
+                    <img src="/images/cay_cao_cap.jpg" alt="Cây cao cấp" class="category-img">
+                    <span class="category-label">CÂY CAO CẤP</span>
+                </a>
+                <a href="#" class="category-item">
+                    <img src="/images/chau_dat_nung.jpg" alt="Chậu đất nung" class="category-img">
+                    <span class="category-label">CHẬU ĐẤT NUNG</span>
+                </a>
+                <a href="#" class="category-item">
+                    <img src="/images/chau_xi_mang.jpg" alt="Chậu xi măng" class="category-img">
+                    <span class="category-label">CHẬU XI MĂNG</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="new-arrival">
+        <div class="container">
+            <h2 class="section-title">SẢN PHẨM MỚI</h2>
+            <div class="product-grid">
+                <!-- Thẻ Sản phẩm 1 -->
+                <a href="#" class="product-card">
+                    <div class="product-image-area">
+                        <img src="/images/cay_tung_bong_lai.jpg" alt="Cây tùng bồng lai" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-name">Cây tùng bồng lai tiểu cảnh chậu sứ thô cẩm TUB0005</p>
+                        <p class="product-price">500.000₫</p>
+                    </div>
+                </a>
+
+                <!-- Thẻ Sản phẩm 2 -->
+                <a href="#" class="product-card">
+                    <div class="product-image-area">
+                        <img src="/images/cay_thiet_moc_lan.jpg" alt="Cây phát tài búp 5" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-name">Cây phát tài bộ 5 – Cây thiết mộc lan CPTK001</p>
+                        <p class="product-price">750.000₫</p>
+                    </div>
+                </a>
+
+                <!-- Thẻ Sản phẩm 3 -->
+                <a href="#" class="product-card">
+                    <div class="product-image-area">
+                        <img src="/images/cay_co_chi_lan.jpg" alt="Cây cỏ lan chi" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-name">Cây cỏ lan chi để bàn chậu sứ mặt cười SPI004</p>
+                        <p class="product-price">280.000₫</p>
+                    </div>
+                </a>
+
+                <!-- Thẻ Sản phẩm 4 -->
+                <a href="#" class="product-card">
+                    <div class="product-image-area">
+                        <img src="/images/cay_luoi_ho.jpg" alt="Cây lưỡi hổ" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-name">Cây lưỡi hổ Bantel Sensation chậu ươm STBS001</p>
+                        <p class="product-price">120.000₫</p>
+                    </div>
+                </a>
+
+                <!-- Thẻ Sản phẩm 5 -->
+                <a href="#" class="product-card">
+                    <div class="product-image-area">
+                        <img src="/images/cay_hong_mon.jpg" alt="Cây hồng môn" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-name">Cây hồng môn cỡ nhỏ chậu sứ trắng ANTH010</p>
+                        <p class="product-price">120.000₫</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="new-arrival">
+        <div class="container">
+            <h2 class="section-title">CÂY CẢNH VĂN PHÒNG</h2>
+            <div class="product-grid">
+                <!-- Thẻ Sản phẩm 1 -->
+                <a href="#" class="product-card">
+                    <div class="product-image-area">
+                        <img src="/images/cay_tung_bong_lai.jpg" alt="Cây tùng bồng lai" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-name">Cây tùng bồng lai tiểu cảnh chậu sứ thô cẩm TUB0005</p>
+                        <p class="product-price">500.000₫</p>
+                    </div>
+                </a>
+
+                <!-- Thẻ Sản phẩm 2 -->
+                <a href="#" class="product-card">
+                    <div class="product-image-area">
+                        <img src="/images/cay_thiet_moc_lan.jpg" alt="Cây phát tài búp 5" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-name">Cây phát tài bộ 5 – Cây thiết mộc lan CPTK001</p>
+                        <p class="product-price">750.000₫</p>
+                    </div>
+                </a>
+
+                <!-- Thẻ Sản phẩm 3 -->
+                <a href="#" class="product-card">
+                    <div class="product-image-area">
+                        <img src="/images/cay_co_chi_lan.jpg" alt="Cây cỏ lan chi" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-name">Cây cỏ lan chi để bàn chậu sứ mặt cười SPI004</p>
+                        <p class="product-price">280.000₫</p>
+                    </div>
+                </a>
+
+                <!-- Thẻ Sản phẩm 4 -->
+                <a href="#" class="product-card">
+                    <div class="product-image-area">
+                        <img src="/images/cay_luoi_ho.jpg" alt="Cây lưỡi hổ" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-name">Cây lưỡi hổ Bantel Sensation chậu ươm STBS001</p>
+                        <p class="product-price">120.000₫</p>
+                    </div>
+                </a>
+
+                <!-- Thẻ Sản phẩm 5 -->
+                <a href="#" class="product-card">
+                    <div class="product-image-area">
+                        <img src="/images/cay_hong_mon.jpg" alt="Cây hồng môn" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-name">Cây hồng môn cỡ nhỏ chậu sứ trắng ANTH010</p>
+                        <p class="product-price">120.000₫</p>
+                    </div>
+                </a>
+            </div>
+            <div style="text-align: center;">
+                <a href="#" class="view-more-button">Xem thêm</a>
+            </div>
+        </div>
+    </div>
+    <div class="new-arrival">
+        <div class="container">
+            <h2 class="section-title">CHẬU XI MĂNG</h2>
+            <div class="product-grid">
+                <!-- Thẻ Sản phẩm 1 -->
+                <a href="#" class="product-card">
+                    <div class="product-image-area">
+                        <img src="/images/cay_tung_bong_lai.jpg" alt="Cây tùng bồng lai" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-name">Cây tùng bồng lai tiểu cảnh chậu sứ thô cẩm TUB0005</p>
+                        <p class="product-price">500.000₫</p>
+                    </div>
+                </a>
+
+                <!-- Thẻ Sản phẩm 2 -->
+                <a href="#" class="product-card">
+                    <div class="product-image-area">
+                        <img src="/images/cay_thiet_moc_lan.jpg" alt="Cây phát tài búp 5" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-name">Cây phát tài bộ 5 – Cây thiết mộc lan CPTK001</p>
+                        <p class="product-price">750.000₫</p>
+                    </div>
+                </a>
+
+                <!-- Thẻ Sản phẩm 3 -->
+                <a href="#" class="product-card">
+                    <div class="product-image-area">
+                        <img src="/images/cay_co_chi_lan.jpg" alt="Cây cỏ lan chi" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-name">Cây cỏ lan chi để bàn chậu sứ mặt cười SPI004</p>
+                        <p class="product-price">280.000₫</p>
+                    </div>
+                </a>
+
+                <!-- Thẻ Sản phẩm 4 -->
+                <a href="#" class="product-card">
+                    <div class="product-image-area">
+                        <img src="/images/cay_luoi_ho.jpg" alt="Cây lưỡi hổ" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-name">Cây lưỡi hổ Bantel Sensation chậu ươm STBS001</p>
+                        <p class="product-price">120.000₫</p>
+                    </div>
+                </a>
+
+                <!-- Thẻ Sản phẩm 5 -->
+                <a href="#" class="product-card">
+                    <div class="product-image-area">
+                        <img src="/images/cay_hong_mon.jpg" alt="Cây hồng môn" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-name">Cây hồng môn cỡ nhỏ chậu sứ trắng ANTH010</p>
+                        <p class="product-price">120.000₫</p>
+                    </div>
+                </a>
+            </div>
+            <div style="text-align: center;">
+                <a href="#" class="view-more-button">Xem thêm</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+</html>
