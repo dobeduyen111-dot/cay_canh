@@ -3,40 +3,29 @@ package ceb.model;
 import java.util.Date;
 
 public class Payments {
-    private Integer PaymentId;
-    private Integer OrderId;
-    private String PaymentMethod;
-    private double Amount;
-    private Date PaymentDate;
-    private boolean IsSuccessful;
+    private int paymentId;
+    private int orderId;
+    private String paymentMethod;
+    private double amount;
+    private Date paymentDate;
+    private boolean isSuccessful;
 
     public Payments() {}
+    public int getPaymentId() { return paymentId; }
+    public void setPaymentId(int paymentId) { this.paymentId = paymentId; }
 
-    public Payments(Integer paymentId, Integer orderId, String paymentMethod,
-                    double amount, Date paymentDate, boolean isSuccessful) {
-        PaymentId = paymentId;
-        OrderId = orderId;
-        PaymentMethod = paymentMethod;
-        Amount = amount;
-        PaymentDate = paymentDate;
-        IsSuccessful = isSuccessful;
-    }
+    public int getOrderId() { return orderId; }
+    public void setOrderId(int orderId) { this.orderId = orderId; }
 
-    public Integer getPaymentId() { return PaymentId; }
-    public void setPaymentId(Integer paymentId) { PaymentId = paymentId; }
+    public String getPaymentMethod() { return paymentMethod; }
+    public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
 
-    public Integer getOrderId() { return OrderId; }
-    public void setOrderId(Integer orderId) { OrderId = orderId; }
+    public double getAmount() { return amount; }
+    public void setAmount(double amount) { this.amount = amount; }
 
-    public String getPaymentMethod() { return PaymentMethod; }
-    public void setPaymentMethod(String paymentMethod) { PaymentMethod = paymentMethod; }
+    public Date getPaymentDate() { return paymentDate; }
+    public void setPaymentDate(Date paymentDate) { this.paymentDate = paymentDate; }
 
-    public double getAmount() { return Amount; }
-    public void setAmount(double amount) { Amount = amount; }
-
-    public Date getPaymentDate() { return PaymentDate; }
-    public void setPaymentDate(Date paymentDate) { PaymentDate = paymentDate; }
-
-    public boolean isSuccessful() { return IsSuccessful; }
-    public void setSuccessful(boolean successful) { IsSuccessful = successful; }
+    public boolean isSuccessful() { return isSuccessful; }
+    public void setSuccessful(boolean successful) { isSuccessful = successful; }
 }

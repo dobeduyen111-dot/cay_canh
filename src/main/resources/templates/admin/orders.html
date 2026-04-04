@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout}">
+
+<head>
+    <title layout:fragment="title">Quản lý Đơn hàng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<section layout:fragment="content" class="admin-content">
+
+    <style>
+        /* Import Font */
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+
+        /* 1. Wrapper riêng cho trang này */
+        .manage-order-page {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f4f6f8; 
+            padding: 40px 20px;
+            min-height: 80vh;
+        }
+
+        .manage-order-page .inner-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 2. Tiêu đề riêng */
+        .manage-order-title {
+            color: #1b4332;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: center;
+            border: none;
+            padding: 0;
+            font-size: 28px;
+        }
+
+        /* 3. Bảng riêng */
+        .order-table-wrapper {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            overflow: hidden; 
+            overflow-x: auto; 
+        }
+
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px; 
+        }
+
+        /* Header bảng */
+        .order-table th {
+            background-color: #1b4332;
+            color: #fff;
+            text-align: center;
+            padding: 18px 10px;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        /* Dòng dữ liệu */
+        .order-table td {
+            padding: 15px 10px;
+            border-bottom: 1px solid #eee;
+            color: #444;
+            vertical-align: middle;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .order-table tr:hover td {
+            background-color: #f9fcf9; 
+        }
+
+        /* Style cho cột Người mua */
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+        .user-name-text {
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* 4. Form & Button */
+        .manage-order-page .action-form {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            justify-content: center;
+            margin: 0; /* Reset margin */
+        }
+
+        .manage-order-page select {
+            padding: 6px 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-family: inherit;
+            color: #333;
+            cursor: pointer;
+            outline: none;
+            transition: 0.3s;
+            background-color: #fff;
+            font-size: 13px;
+        }
+
+        .manage-order-page select:focus {
+            border-color: #2a7a56;
+            box-shadow: 0 0 0 3px rgba(42, 122, 86, 0.1);
+        }
+
+        .manage-order-page .btn-update {
+            background-color: #2a7a56;
+            color: white;
+            border: none;
+            padding: 7px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 13px;
+        }
+
+        .manage-order-page .btn-update:hover {
+            background-color: #1b4332;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(27, 67, 50, 0.2);
+        }
+
+        /* [MỚI] Style cho nút Xóa */
+        .manage-order-page .btn-delete {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 7px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            margin-left: 5px; /* Cách nút cập nhật một chút */
+        }
+
+        .manage-order-page .btn-delete:hover {
+            background-color: #c0392b;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(231, 76, 60, 0.2);
+        }
+
+        .manage-order-page .status-text {
+            color: #2a7a56;
+            font-weight: 700;
+        }
+
+    </style>
+
+    <div class="manage-order-page">
+        <div class="inner-container">
+            
+            <h2 class="manage-order-title">Quản lý Đơn hàng</h2>
+
+            <div class="order-table-wrapper">
+                <table class="order-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 8%;">Mã Đơn</th>
+                            <th style="width: 15%;">Người mua</th>
+                            <th style="width: 12%;">Ngày đặt</th>
+                            <th style="width: 15%;">Tổng tiền</th>
+                            <th style="width: 15%;">Trạng thái</th>
+                            <th style="width: 35%;">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="o : ${orders}">
+                            <td><b th:text="'#' + ${o.orderId}"></b></td>
+                            
+                            <td>
+                                <div class="user-info">
+                                    <span class="user-name-text" th:text="${o.fullName}" 
+                                          style="display:block; font-weight:bold; color:#1b4332; margin-top:4px;">
+                                    </span>
+                                </div>
+                            </td>
+                            
+                            <td th:text="${o.orderDate}"></td>
+                            
+                            <td style="color: #d35400; font-weight: 700;" 
+                                th:text="${#numbers.formatDecimal(o.totalAmount, 0, 'COMMA', 0, 'POINT')} + ' ₫'">
+                            </td>
+                            
+                            <td>
+                                <span class="status-text" th:text="${o.status}"></span>
+                            </td>
+                            
+                            <td>
+                                <div style="display: flex; align-items: center; justify-content: center;">
+                                    <form action="/admin/orders/update" method="post" class="action-form">
+                                        <input type="hidden" name="orderId" th:value="${o.orderId}"/>
+                                        
+                                        <select name="status">
+                                            <option value="Chờ xử lý" th:selected="${o.status == 'Chờ xử lý'}">Chờ xử lý</option>
+                                            <option value="Đang giao" th:selected="${o.status == 'Đang giao'}">Đang giao</option>
+                                            <option value="Hoàn thành" th:selected="${o.status == 'Hoàn thành'}">Hoàn thành</option>
+                                            <option value="Đã hủy" th:selected="${o.status == 'Đã hủy'}">Đã hủy</option>
+                                        </select>
+                                        
+                                        <button type="submit" class="btn-update">Cập nhật</button>
+                                    </form>
+
+                                    <a th:href="@{'/admin/orders/delete/' + ${o.orderId}}" 
+                                       class="btn-delete"
+                                       onclick="return confirm('Bạn có chắc chắn muốn XÓA đơn hàng này không?');"
+                                       title="Xóa đơn hàng">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</section>
+</html>

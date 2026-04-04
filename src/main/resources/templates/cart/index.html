@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{shared/layout}">
+<section layout:fragment="content" class="home-content">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+        
+        .home-content {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #fdfdfd;
+            color: #333;
+            padding-bottom: 50px;
+        }
+        h1 {
+            text-align: center;
+            color: #164a3e;
+            margin: 40px 0;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .empty-msg {
+            text-align: center;
+            color: #777;
+            margin-top: 50px;
+        }
+        .cart-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .cart-header {
+            display: grid;
+            grid-template-columns: 50px 120px 2fr 1fr 1fr 1fr;
+            gap: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: #164a3e;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        .header-col { text-align: left; }
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .cart-item {
+            display: grid;
+            grid-template-columns: 50px 120px 2fr 1fr 1fr 1fr;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid #f0f0f0;
+            background: #fff;
+        }
+        .btn-remove {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            color: #999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+            margin: 0 auto;
+        }
+        .btn-remove:hover {
+            background-color: #fff0f0;
+            border-color: #e74c3c;
+            color: #e74c3c;
+        }
+        .cart-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            object-fit: cover;
+            background-color: #f9f9f9;
+        }
+        .cart-name {
+            font-weight: 600;
+            font-size: 16px;
+            color: #333;
+            line-height: 1.4;
+        }
+        .cart-price {
+            color: #006a54;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .qty-form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        .qty-input {
+            width: 50px;
+            padding: 5px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+        }
+        .cart-subtotal {
+            color: #006a54;
+            font-weight: 700;
+            font-size: 18px;
+            text-align: right;
+        }
+        
+        .total-box {
+            margin-top: 40px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .total-text { font-size: 20px; margin-bottom: 30px; }
+        .total-price {
+            color: #006a54;
+            font-weight: 700;
+            font-size: 28px;
+        }
+
+        /* --- SỬA CSS NÚT BẤM (BUTTONS GROUP) --- */
+        .cart-actions {
+            display: flex;
+            gap: 20px; /* Khoảng cách giữa 2 nút */
+            justify-content: center;
+        }
+
+        .btn-action {
+            display: inline-block;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Nút Tiếp tục mua hàng */
+        .continue-btn {
+            background-color: #fff;
+            color: #164a3e;
+            border: 2px solid #164a3e;
+        }
+        .continue-btn:hover {
+            background-color: #f0f7f5;
+            transform: translateY(-2px);
+        }
+
+        /* Nút Thanh toán */
+        .checkout-btn {
+            background-color: #164a3e;
+            color: #fff;
+            border: 2px solid #164a3e; /* Thêm border để kích thước bằng nhau */
+        }
+        .checkout-btn:hover {
+            background-color: #10382f;
+            border-color: #10382f;
+            transform: translateY(-2px);
+        }
+    </style>
+
+    <h1>Giỏ hàng của bạn</h1>
+    <div class="cart-container">
+        
+        <div th:if="${#lists.isEmpty(cartItems)}" class="empty-msg">
+            <h3>Giỏ hàng đang trống...</h3>
+            <p>Hãy quay lại cửa hàng để chọn món đồ ưng ý nhé!</p>
+            <a href="/product" class="btn-action continue-btn" style="margin-top: 20px;">Tiếp tục mua sắm</a>
+        </div>
+
+        <div th:if="${!#lists.isEmpty(cartItems)}">
+            <div class="cart-header">
+                <div class="text-center"><i class="fa-solid fa-plant-wilt"></i></div>
+                <div class="header-col">Sản phẩm</div>
+                <div class="header-col">Tên</div>
+                <div class="text-center">Giá</div>
+                <div class="text-center">Số lượng</div>
+                <div class="text-right">Thành tiền</div>
+            </div>
+            
+            <div th:each="ci : ${cartItems}" class="cart-item">
+                <a th:href="@{'/cart/remove/' + ${ci.cartItemId}}" class="btn-remove">&#10005;</a>
+                <img th:src="@{'/images/' + ${ci.product.image}}" class="cart-img" />
+                <div class="cart-name" th:text="${ci.product.productName}"></div>
+                
+                <div class="text-center">
+                    <span class="cart-price" th:text="${#numbers.formatInteger(ci.product.price, 3, 'POINT')}"></span> VNĐ
+                </div>
+                
+                <div class="qty-form">
+                    <input type="hidden" class="cartItemId" th:value="${ci.cartItemId}" />
+                    <input type="number" class="qty-input qty-change" min="1" th:value="${ci.quantity}" />
+                </div>
+                
+                <div class="cart-subtotal">
+                    <span th:text="${#numbers.formatInteger(ci.product.price * ci.quantity, 3, 'POINT')}"></span> VNĐ
+                </div>
+            </div>
+
+            <div class="total-box">
+                <div class="total-text">
+                    Tổng cộng: <span class="total-price" th:text="${#numbers.formatInteger(total, 3, 'POINT')}"></span> VNĐ
+                </div>
+                
+                <div class="cart-actions">
+                    <a th:href="@{/product}" class="btn-action continue-btn">
+                        <i class="fas fa-arrow-left"></i> Tiếp tục mua hàng
+                    </a>
+                    
+                    <a th:href="@{/checkout}" class="btn-action checkout-btn">
+                        Thanh toán <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll(".qty-change").forEach(input => {
+            input.addEventListener("change", async function () {
+                const cartItemId = this.closest(".qty-form").querySelector(".cartItemId").value;
+                const quantity = this.value;
+
+                const response = await fetch("/cart/update", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: `cartItemId=${cartItemId}&quantity=${quantity}`
+                });
+
+                if (response.ok) {
+                    const priceText = this.closest(".cart-item").querySelector(".cart-price").innerText;
+                    const price = parseInt(priceText.replace(/[^\d]/g, "")); 
+                    
+                    const newSubtotal = price * quantity;
+                    
+                    const subtotalElement = this.closest(".cart-item").querySelector(".cart-subtotal span");
+                    subtotalElement.innerText = newSubtotal.toLocaleString("vi-VN").replace(/,/g, "."); 
+
+                    updateTotal();
+                }
+            });
+        });
+
+        function updateTotal() {
+            let sum = 0;
+            document.querySelectorAll(".cart-subtotal span").forEach(el => {
+                sum += parseInt(el.innerText.replace(/[^\d]/g, ""));
+            });
+            
+            const totalElement = document.querySelector(".total-price");
+            totalElement.innerText = sum.toLocaleString("vi-VN").replace(/,/g, ".");
+        }
+    </script>
+</section>
+</html>

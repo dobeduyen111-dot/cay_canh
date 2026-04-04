@@ -1,29 +1,61 @@
 package ceb.controller;
 
-import ceb.model.Users;
-import ceb.service.UsersService;
+import ceb.model.Products;
+import ceb.service.ProductsService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/api/users")
+@Controller
+@RequestMapping("/product")
 public class UserController {
+    @Autowired
+    private ProductsService service;
+    @GetMapping
+    public String list(Model model) {
+        model.addAttribute("list", service.all());
+        return "product/product";
+    }
+    @GetMapping("/search")
+    public String search(@RequestParam("keyword") String keyword, Model model) {
+        List<Products> results = service.search(keyword);
+        model.addAttribute("results", results);
+        model.addAttribute("keyword", keyword);
+        return "product/search";
+    }
+    
+    @GetMapping("/{id}")
+    public String detail(@PathVariable int id, Model model) {
+        Products p = service.get(id);
 
-    @Autowired private UsersService userService;
-
-    @PostMapping("/register")
-    public Object register(@RequestBody Users u, @RequestParam String password) {
-        String res = userService.register(u, password);
-        if ("EMAIL_EXISTS".equals(res)) {
-            return java.util.Map.of("status","error","message","Email đã tồn tại");
+        if (p == null) {
+            return "redirect:/product"; 
         }
-        return java.util.Map.of("status","ok","message","Đăng ký thành công");
+
+        model.addAttribute("product", p);
+        return "product/detail";
+    }
+    @GetMapping("/cay")
+    public String cay(Model model) {
+        model.addAttribute("products", service.getProductsByCategory(1));
+        model.addAttribute("title", "CÂY CẢNH");
+        return "product/cay";
     }
 
-    @PostMapping("/login")
-    public Object login(@RequestParam String email, @RequestParam String password) {
-        Users u = userService.login(email, password);
-        if (u == null) return java.util.Map.of("status","error","message","Sai tài khoản hoặc mật khẩu");
-        return u;
+    @GetMapping("/chau")
+    public String chau(Model model) {
+        model.addAttribute("products", service.getProductsByCategory(2));
+        model.addAttribute("title", "CHẬU CÂY");
+        return "product/chau";
     }
+
+    @GetMapping("/phukien")
+    public String phuKien(Model model) {
+        model.addAttribute("products", service.getProductsByCategory(3));
+        model.addAttribute("title", "PHỤ KIỆN CÂY CẢNH");
+        return "product/phukien";
+    }
+
 }

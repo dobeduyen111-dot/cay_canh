@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Hệ thống quản lý Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="/Images/admin.png" type="image/x-icon">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+        /* --- CẤU HÌNH CHUNG --- */
+        body { 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Roboto', sans-serif; 
+            background-color: #ebedef; /* Màu nền sáng, dịu mắt hơn */
+            display: flex; 
+            height: 100vh; 
+            overflow: hidden; 
+        }
+
+        /* --- SIDEBAR (THANH MENU TRÁI) --- */
+        .sidebar {
+            width: 260px;
+            background: linear-gradient(180deg, #343a40 0%, #212529 100%); /* Gradient tạo chiều sâu */
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        /* Logo */
+        .logo { 
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px; 
+            font-weight: 700; 
+            background-color: rgba(0,0,0,0.2); 
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .logo i { 
+            color: #f39c12; 
+            margin-right: 10px;
+        }
+
+        /* Menu List */
+        .menu { 
+            list-style: none; 
+            padding: 15px 0; 
+            margin: 0; 
+            flex: 1; 
+            overflow-y: auto;
+        }
+
+        /* --- LIÊN KẾT MENU (Links) --- */
+        .menu li a {
+            display: flex;
+            align-items: center;
+            padding: 12px 25px;
+            color: #c2c7d0; 
+            text-decoration: none; 
+            border-left: 4px solid transparent; /* Tạo thanh màu bên trái khi hover */
+            transition: all 0.3s ease;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .menu li a i { 
+            width: 30px; 
+            text-align: center; 
+            margin-right: 10px; 
+            font-size: 16px;
+        }
+
+        .menu li a:hover { 
+            background-color: rgba(255,255,255,0.05); 
+            color: #fff; 
+            border-left-color: #f39c12; /* Màu cam nổi bật khi hover */
+            padding-left: 30px; /* Hiệu ứng trượt nhẹ */
+        }
+
+        /* --- XỬ LÝ NÚT LOGOUT (ĐẶC BIỆT) --- */
+        /* Vì nút logout là button trong form, ta reset nó để giống thẻ a */
+        .menu form {
+            display: block;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            border-top: 1px solid rgba(255,255,255,0.1); /* Đường kẻ ngăn cách */
+            margin-top: 10px;
+            padding-top: 10px;
+        }
+
+        .btn-logout {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #c2c7d0;
+            padding: 12px 25px;
+            text-align: left;
+            font-family: 'Roboto', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            border-left: 4px solid transparent;
+        }
+
+        /* Thêm icon cho nút Logout bằng CSS vì HTML không có thẻ i */
+        .btn-logout::before {
+            content: '\f2f5'; /* Mã icon Sign-out của FontAwesome */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            width: 30px;
+            text-align: center;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        .btn-logout:hover {
+            background-color: rgba(220, 53, 69, 0.15); /* Màu đỏ nhạt nền */
+            color: #ff6b6b; /* Màu chữ đỏ sáng */
+            border-left-color: #ff6b6b;
+            padding-left: 30px;
+        }
+
+        /* --- NỘI DUNG CHÍNH (BÊN PHẢI) --- */
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .top-navbar {
+            height: 60px; 
+            background: #fff; 
+            display: flex; 
+            align-items: center; 
+            justify-content: flex-end; 
+            padding: 0 30px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Đổ bóng nhẹ thay vì border */
+            z-index: 900;
+        }
+        
+        .top-navbar span {
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .top-navbar b {
+            color: #343a40;
+            margin-left: 5px;
+        }
+
+        .main-content {
+            padding: 30px;
+            overflow-y: auto; 
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="logo"><i class="fas fa-shield-alt"></i>ADMIN</div>
+        <ul class="menu">
+            <li><a th:href="@{/admin/dashboard}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a th:href="@{/admin/product}"><i class="fas fa-box"></i> Quản lý Sản phẩm</a></li>
+            <li><a th:href="@{/admin/orders}"><i class="fas fa-shopping-cart"></i> Quản lý Đơn hàng</a></li>
+            <li><a th:href="@{/admin/users}"><i class="fas fa-users"></i> Khách hàng</a></li>
+            <form th:action="@{/auth/logout}" method="post" style="display:inline;">
+                <button type="submit" class="btn-logout">Logout</button>
+            </form>
+        </ul>
+    </nav>
+
+    <div class="content-wrapper">
+        <div class="top-navbar">
+            <span>Xin chào, <b>Admin</b></span>
+        </div>
+
+        <div class="main-content">
+            <div layout:fragment="content">
+                </div>
+        </div>
+    </div>
+</body>
+</html>

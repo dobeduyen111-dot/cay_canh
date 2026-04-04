@@ -3,24 +3,34 @@ package ceb.model;
 import java.util.Date;
 
 public class Cart {
-    private Integer CartId;
-    private Integer UserId;
-    private Date UpdatedAt;
+
+    private int cartId;
+    private int userId;
+    private Date updatedAt;
 
     public Cart() {}
 
-    public Cart(Integer cartId, Integer userId, Date updatedAt) {
-        CartId = cartId;
-        UserId = userId;
-        UpdatedAt = updatedAt;
+    public int getCartId() {
+        return cartId;
     }
 
-    public Integer getCartId() { return CartId; }
-    public void setCartId(Integer cartId) { CartId = cartId; }
+    public void setCartId(int cartId) {
+        this.cartId = cartId;
+    }
 
-    public Integer getUserId() { return UserId; }
-    public void setUserId(Integer userId) { UserId = userId; }
+    public int getUserId() {
+        return userId;
+    }
 
-    public Date getUpdatedAt() { return UpdatedAt; }
-    public void setUpdatedAt(Date updatedAt) { UpdatedAt = updatedAt; }
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }

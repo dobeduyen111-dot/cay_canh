@@ -1,47 +1,51 @@
 package ceb.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Orders {
-    private Integer OrderId;
-    private Integer UserId;
-    private Date OrderDate;
-    private String Status;
-    private double TotalAmount;
-    private String ShippingAddress;
-    private String Note;
+    private int orderId;
+    private int userId;
+    private Date orderDate;
+    private String status;
+    private double totalAmount;
+    private String shippingAddress;
+    private String note;
+
+    private List<OrderItems> items;
 
     public Orders() {}
+    private String fullName; 
 
-    public Orders(Integer orderId, Integer userId, Date orderDate, String status,
-                  double totalAmount, String shippingAddress, String note) {
-        OrderId = orderId;
-        UserId = userId;
-        OrderDate = orderDate;
-        Status = status;
-        TotalAmount = totalAmount;
-        ShippingAddress = shippingAddress;
-        Note = note;
+    public String getFullName() {
+        return fullName;
     }
 
-    public Integer getOrderId() { return OrderId; }
-    public void setOrderId(Integer orderId) { OrderId = orderId; }
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
-    public Integer getUserId() { return UserId; }
-    public void setUserId(Integer userId) { UserId = userId; }
+    public int getOrderId() { return orderId; }
+    public void setOrderId(int orderId) { this.orderId = orderId; }
 
-    public Date getOrderDate() { return OrderDate; }
-    public void setOrderDate(Date orderDate) { OrderDate = orderDate; }
+    public int getUserId() { return userId; }
+    public void setUserId(int userId) { this.userId = userId; }
 
-    public String getStatus() { return Status; }
-    public void setStatus(String status) { Status = status; }
+    public Date getOrderDate() { return orderDate; }
+    public void setOrderDate(Date orderDate) { this.orderDate = orderDate; }
 
-    public double getTotalAmount() { return TotalAmount; }
-    public void setTotalAmount(double totalAmount) { TotalAmount = totalAmount; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
-    public String getShippingAddress() { return ShippingAddress; }
-    public void setShippingAddress(String shippingAddress) { ShippingAddress = shippingAddress; }
+    public double getTotalAmount() { return totalAmount; }
+    public void setTotalAmount(double totalAmount) { this.totalAmount = totalAmount; }
 
-    public String getNote() { return Note; }
-    public void setNote(String note) { Note = note; }
+    public String getShippingAddress() { return shippingAddress; }
+    public void setShippingAddress(String shippingAddress) { this.shippingAddress = shippingAddress; }
+
+    public String getNote() { return note; }
+    public void setNote(String note) { this.note = note; }
+
+    public List<OrderItems> getItems() { return items; }
+    public void setItems(List<OrderItems> items) { this.items = items; }
 }

@@ -72,7 +72,7 @@
 
 /* Logo */
 .logo img {
-    height: 60px;
+    height: 70px;
 }
 
 /* ===================== MENU CHÍNH ===================== */
@@ -107,117 +107,95 @@
 }
 
 /* ===================== MEGA MENU (Cái bảng sổ xuống) ===================== */
-.mega-menu {
-    position: absolute;
-    top: 100%; 
-    
-    /* --- CÔNG THỨC CANH GIỮA CHUẨN --- */
-    left: 50%;              /* Đẩy mép trái ra giữa màn hình */
-    transform: translateX(-50%); /* Kéo ngược lại 50% độ rộng của chính nó */
-    /* --------------------------------- */
-    
-    width: 1000px; /* Hoặc 1100px tùy bạn */
-    background: #fff;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    padding: 30px;
-    border-top: 3px solid #173f2b;
-    
-    /* Giữ nguyên hiệu ứng cũ của bạn */
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    z-index: 999;
-}
 
-/* Cần thêm đoạn này để chỉnh lại hiệu ứng trượt lên cho khớp với transform mới */
-.has-mega:hover .mega-menu {
-    opacity: 1;
-    visibility: visible;
-    /* Kết hợp translateX(-50%) với translateY(0) */
-    transform: translateX(-50%) translateY(0); 
-}
 
-/* Lúc ẩn thì trượt xuống xíu (giữ translateX -50%) */
-.mega-menu {
-    transform: translateX(-50%) translateY(20px);
-}
-
-/* Bố cục 4 cột bên trong */
-.mega-content {
+.menu-list {
+    list-style: none;
     display: flex;
-    justify-content: space-between;
-}
-
-.mega-col {
-    width: 23%; /* Chia đều không gian */
-}
-
-/* Tiêu đề cột (VD: Theo kiểu dáng cây) */
-.mega-col h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    color: #173f2b;
-    margin-bottom: 15px;
-    font-weight: bold;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 8px;
-}
-
-/* Link con bên trong */
-.mega-col a {
-    display: block;
-    font-family: sans-serif; /* Font chữ thường cho dễ đọc */
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 8px;
-    font-weight: normal;
-}
-
-.mega-col a:hover {
-    color: #2a7a56;
-    padding-left: 5px; /* Hiệu ứng đẩy chữ sang phải */
-}
-
-/* Cột hình ảnh */
-.mega-col.image-col {
-    background-color: #eee; /* Màu xám để giữ chỗ khi chưa có ảnh */
-    border-radius: 5px;
-    min-height: 250px; /* Bắt buộc cao 250px để không bị xẹp */
-    display: flex;
-    align-items: center;
+    gap: 40px;
     justify-content: center;
-    overflow: hidden; /* Cắt phần ảnh thừa */
+    margin: 0;
+    padding: 0;
 }
 
-.mega-col.image-col img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block; /* Đảm bảo ảnh hiện khối */
+.menu-item a {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+    color: #2c3e50;
+    transition: 0.3s;
 }
 
-/* ===================== ACTIONS (Cart + Search) ===================== */
+.menu-item a:hover {
+    color: #27ae60;
+    text-decoration: underline;
+}
+
+/* ===================== ACTIONS ===================== */
 .actions {
     display: flex;
     align-items: center;
     gap: 25px;
-    font-size: 20px;
-    color: #173f2b;
-    cursor: pointer;
 }
 
-.cart {
+/* ===================== CART ===================== */
+.cart-link {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
+    text-decoration: none;
+    color: #173f2b;
+    position: relative;
 }
 
-.cart .cart-count {
-    font-family: 'Playfair Display', serif; 
-    font-size: 18px;
+.cart .icon {
+    font-size: 24px;
+}
+
+.cart-badge {
+    background: #ff4d4d;
+    color: white;
+    font-size: 13px;
     font-weight: bold;
+    padding: 2px 7px;
+    border-radius: 50px;
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    min-width: 20px;
+    text-align: center;
 }
 
-.search-icon {
-    font-size: 22px;
+/* ===================== SEARCH BOX ===================== */
+.search-box form {
+    display: flex;
+    align-items: center;
+    background: #f1f5f2;
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: 1px solid #c6d7c3;
 }
+
+.search-box input {
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 6px 8px;
+    font-size: 15px;
+    width: 140px;
+    color: #173f2b;
+}
+
+.search-box button {
+    border: none;
+    background: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px;
+    color: #173f2b;
+}
+
+.search-box button:hover {
+    opacity: 0.7;
+}
+

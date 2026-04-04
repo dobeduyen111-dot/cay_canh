@@ -3,63 +3,112 @@ package ceb.model;
 import java.util.Date;
 
 public class Products {
-    private Integer ProductId;
-    private Integer CategoryId;
-    private String ProductName;
-    private String Description;
-    private String CareGuide;
-    private double Price;
-    private int Stock;
-    private String Image;
-    private boolean IsActive;
-    private Date CreatedAt;
+
+    private Integer productId;
+    private Integer categoryId;
+    private String productName;
+    private String description;
+    private String careGuide;
+    private double price;
+    private int stock;
+    private String image;
+    private boolean active;
+    private Date createdAt;
 
     public Products() {}
 
     public Products(Integer productId, Integer categoryId, String productName, String description,
                     String careGuide, double price, int stock, String image,
-                    boolean isActive, Date createdAt) {
-        ProductId = productId;
-        CategoryId = categoryId;
-        ProductName = productName;
-        Description = description;
-        CareGuide = careGuide;
-        Price = price;
-        Stock = stock;
-        Image = image;
-        IsActive = isActive;
-        CreatedAt = createdAt;
+                    boolean active, Date createdAt) {
+        this.productId = productId;
+        this.categoryId = categoryId;
+        this.productName = productName;
+        this.description = description;
+        this.careGuide = careGuide;
+        this.price = price;
+        this.stock = stock;
+        this.image = image;
+        this.active = active;
+        this.createdAt = createdAt;
     }
 
-    public Integer getProductId() { return ProductId; }
-    public void setProductId(Integer productId) { ProductId = productId; }
+    public Integer getProductId() {
+        return productId;
+    }
 
-    public Integer getCategoryId() { return CategoryId; }
-    public void setCategoryId(Integer categoryId) { CategoryId = categoryId; }
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
 
-    public String getProductName() { return ProductName; }
-    public void setProductName(String productName) { ProductName = productName; }
+    public Integer getCategoryId() {
+        return categoryId;
+    }
 
-    public String getDescription() { return Description; }
-    public void setDescription(String description) { Description = description; }
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
 
-    public String getCareGuide() { return CareGuide; }
-    public void setCareGuide(String careGuide) { CareGuide = careGuide; }
+    public String getProductName() {
+        return productName;
+    }
 
-    public double getPrice() { return Price; }
-    public void setPrice(double price) { Price = price; }
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 
-    public int getStock() { return Stock; }
-    public void setStock(int stock) { Stock = stock; }
+    public String getDescription() {
+        return description;
+    }
 
-    public String getImage() { return Image; }
-    public void setImage(String image) { Image = image; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    public boolean isActive() { return IsActive; }
-    public void setisActive(boolean active) { IsActive = active; }
+    public String getCareGuide() {
+        return careGuide;
+    }
 
-    public Date getCreatedAt() { return CreatedAt; }
-    public void setCreatedAt(Date createdAt) { CreatedAt = createdAt; }
+    public void setCareGuide(String careGuide) {
+        this.careGuide = careGuide;
+    }
 
+    public double getPrice() {
+        return price;
+    }
 
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 }

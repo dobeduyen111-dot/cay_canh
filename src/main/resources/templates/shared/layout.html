@@ -1,196 +1,316 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
 <head>
-    <title layout:fragment="title">Tree</title>
+    <title layout:fragment="title">CÂY CẢNH</title>
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/homeindex.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="/js/jquery-3.7.1.js"></script>
     <link rel="shortcut icon" href="/Images/favicon.png" type="image/x-icon">
+    <style>
+        .my-custom-dropdown {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            color: inherit;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            min-width: 170px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 999;
+            border-radius: 5px;
+            margin-top: 10px;
+            right: 0; 
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-weight: normal;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+        .show {
+            display: block;
+        }
+    </style>
 </head>
-<title layout:fragment="title">Trang chủ</title>
 <body>
     <div class="topbar">
-    <div class="container topbar-inner">
-        <div class="left">
-            <span class="icon">⏱</span> 08:30 - 22:00
-            <span class="sep">|</span>
-            <span class="icon">📞</span> 0838 369 639 - 09 6688 9393
-        </div>
-
-        <div class="right">
-            <a href="/wishlist">
-                <span class="icon">🤍</span>
-            </a>
-            <span class="sep">|</span>
-            <span th:if="${loggedName == null}">
-                <a href="/auth/login" class="login">Login</a>
-            </span>
-            <span th:if="${loggedName != null}">
-                👋 <b th:text="${loggedName}"></b>
+        <div class="container topbar-inner">
+            <div class="left">
+                <span class="icon">⏱</span> 08:30 - 22:00
                 <span class="sep">|</span>
-            <form th:action="@{/auth/logout}" method="post">
-                <a href="/auth/logout">Logout</a>
-            </form>
-            </span>
-        </div>
-    </div>
-</div>
-
-<!-- ===== MAIN HEADER ===== -->
-<header class="main-header">
-    <div class="container header-inner">
-        <div class="logo">
-            <img src="https://mowgarden.com/wp-content/uploads/2022/07/logo-mow-green.png" alt="MOW Logo">
-        </div>
-        <nav class="menu">
-            <ul class="menu-list">
-                <li class="menu-item has-mega">
-                    <a href="#">Cây trong nhà ▼</a>
-                    <div class="mega-menu">
-                        <div class="mega-content">
-                            <div class="mega-col">
-                                <h3>Theo kiểu dáng cây</h3>
-                                <a href="#">> Cây Cao & Lớn</a>
-                                <a href="#">> Cây Cảnh Mini</a>
-                                <a href="#">> Cây Treo Trong Nhà</a>
-                                <a href="#">> Cây Nhiệt Đới</a>
-                                <a href="#">> Cây Kiểng Lá</a>
-                            </div>
-                            <div class="mega-col">
-                                <h3>Theo vị trí đặt</h3>
-                                <a href="#">> Cây Cảnh Để Bàn</a>
-                                <a href="#">> Cây Cảnh Văn Phòng</a>
-                                <a href="#">> Cây Trong Bếp & Tắm</a>
-                                <a href="#">> Cây Trước Cửa</a>
-                                <a href="#">> Cây Trồng Ban Công</a>
-                            </div>
-                            <div class="mega-col">
-                                <h3>Theo chức năng</h3>
-                                <a href="#">> Cây Lọc Không Khí</a>
-                                <a href="#">> Cây Dễ Trồng</a>
-                                <a href="#">> Cây Cần Ít Ánh Sáng</a>
-                                <a href="#">> Cây Thủy Sinh</a>
-                                <a href="#">> Cây Phong Thủy</a>
-                            </div>
-                            <div class="mega-col image-col">
-                                <img src="https://images.unsplash.com/photo-1470058869958-2a77ade41c02?q=80&w=500&auto=format&fit=crop" alt="MOW Garden">
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="menu-item has-mega">
-                    <a href="#">Cây ngoài trời ▼</a>
-                    <div class="mega-menu">
-                        <div class="mega-content">
-                            <div class="mega-col">
-                                <h3>Cây Bóng Mát</h3>
-                                <a href="#">> Cây Bàng Singapore</a>
-                                <a href="#">> Cây Phát Tài Núi</a>
-                                <a href="#">> Cây Cau Cảnh</a>
-                                <a href="#">> Cây Chuối Cảnh</a>
-                            </div>
-                            <div class="mega-col">
-                                <h3>Cây Có Hoa</h3>
-                                <a href="#">> Hoa Giấy</a>
-                                <a href="#">> Hoa Hồng Leo</a>
-                                <a href="#">> Cây Sử Quân Tử</a>
-                                <a href="#">> Cây Nguyệt Quế</a>
-                            </div>
-                            <div class="mega-col">
-                                <h3>Cây Ăn Quả</h3>
-                                <a href="#">> Cây Chanh Vàng</a>
-                                <a href="#">> Cây Ổi Tím</a>
-                                <a href="#">> Cây Lựu Đỏ</a>
-                                <a href="#">> Cây Táo Mèo</a>
-                            </div>
-                            <div class="mega-col image-col">
-                                <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=500&auto=format&fit=crop" alt="Outdoor Plants">
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="menu-item has-mega">
-                    <a href="#">Chậu cây ▼</a>
-                    <div class="mega-menu">
-                        <div class="mega-content">
-                            <div class="mega-col">
-                                <h3>Chất liệu</h3>
-                                <a href="#">> Chậu Đất Nung</a>
-                                <a href="#">> Chậu Gốm Sứ</a>
-                                <a href="#">> Chậu Xi Măng</a>
-                                <a href="#">> Chậu Composite</a>
-                                <a href="#">> Giỏ Mây Tre Đan</a>
-                            </div>
-                            <div class="mega-col">
-                                <h3>Kích thước</h3>
-                                <a href="#">> Chậu Mini (Để bàn)</a>
-                                <a href="#">> Chậu Cỡ Trung</a>
-                                <a href="#">> Chậu Đại (Cây lớn)</a>
-                                <a href="#">> Chậu Chữ Nhật</a>
-                            </div>
-                            <div class="mega-col">
-                                <h3>Phụ kiện chậu</h3>
-                                <a href="#">> Đĩa Lót Chậu</a>
-                                <a href="#">> Chân Đế Gỗ</a>
-                                <a href="#">> Giá Sắt Treo</a>
-                                <a href="#">> Sỏi Trang Trí</a>
-                            </div>
-                            <div class="mega-col image-col">
-                                <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=500&auto=format&fit=crop" alt="Pots">
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="menu-item has-mega">
-                    <a href="#">Phụ kiện ▼</a>
-                    <div class="mega-menu">
-                        <div class="mega-content">
-                            <div class="mega-col">
-                                <h3>Đất & Phân Bón</h3>
-                                <a href="#">> Đất Sạch Hữu Cơ</a>
-                                <a href="#">> Phân Bón Lá</a>
-                                <a href="#">> Phân Tan Chậm</a>
-                                <a href="#">> Giá Thể Sen Đá</a>
-                            </div>
-                            <div class="mega-col">
-                                <h3>Dụng Cụ</h3>
-                                <a href="#">> Bình Tưới Cây</a>
-                                <a href="#">> Kéo Cắt Tỉa</a>
-                                <a href="#">> Xẻng Làm Vườn</a>
-                                <a href="#">> Găng Tay</a>
-                            </div>
-                            <div class="mega-col">
-                                <h3>Trang Trí</h3>
-                                <a href="#">> Tượng Mini</a>
-                                <a href="#">> Đèn Led Cho Cây</a>
-                                <a href="#">> Kệ Gỗ Decor</a>
-                                <a href="#">> Macrame Treo Cây</a>
-                            </div>
-                            <div class="mega-col image-col">
-                                <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?q=80&w=500&auto=format&fit=crop" alt="Accessories">
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="menu-item">
-                    <a href="#">Hướng dẫn ▼</a>
-                </li>
-            </ul>
-        </nav>
-
-        <div class="actions">
-            <div class="cart">
-                <span class="cart-count">0đ</span>
-                <span class="icon">🛒</span>
+                <span class="icon">📞</span> 0838 369 639 - 09 6688 9393
             </div>
-            <span class="icon search-icon">🔍</span>
+            <div class="right">
+                <a href="/wishlist">
+                    <i class="fa-regular fa-heart"></i>
+                    <span th:text="${session.wishlistCount != null ? session.wishlistCount : 0}">0</span>
+                </a>
+                <span class="sep">|</span>
+                
+                <span th:if="${loggedName == null}">
+                    <a href="#" id="header-login-btn">Login</a>
+                </span>
+                
+                <span th:if="${loggedName != null}">
+                    
+                    <span th:unless="${#strings.containsIgnoreCase(loggedName, 'Admin')}">
+                        👋 <b th:text="${loggedName}"></b>
+                    </span>
+                    
+                    <div class="my-custom-dropdown" th:if="${#strings.containsIgnoreCase(loggedName, 'Admin')}">
+                        <span class="dropdown-trigger" onclick="toggleAdminMenu()">👋 <b th:text="${loggedName}"></b> ▾</span>
+                        <div class="dropdown-content" id="adminMenu">
+                            <a href="/admin/dashboard">⚙️ Vào trang Admin</a>
+                        </div>
+                    </div>
+                    
+                    <span class="sep">|</span>
+                    <form th:action="@{/auth/logout}" method="post" style="display:inline;">
+                        <button type="submit" class="btn-logout">Logout</button>
+                    </form>
+                </span>
+
+            </div>
         </div>
     </div>
-</header>
-<section class="container-fluid" layout:fragment="content"></section>
-</body>
+    <header class="main-header">
+        <div class="container header-inner">
+            <div class="logo">
+                <a href="/"><img src="/images/logo.jpg" alt="MOW Logo"></a>
+            </div>
+            <nav class="menu">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <a href="/product/cay">Cây cảnh</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/product/chau">Chậu cây</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/product/phukien">Phụ kiện</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/instruction">Hướng dẫn</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/order/history">Đơn hàng</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="actions">
+            <div class="cart">
+                <a href="/cart" class="cart-link">
+                    <span class="icon">🛒</span>
+                    <span id="cart-count" class="cart-badge" 
+                        th:text="${globalCartCount}">0</span>
+                </a>
+            </div>
+            <div class="search-box">
+                <form action="/product/search" method="get">
+                    <input type="text" name="keyword" placeholder="Tìm cây cảnh...">
+                    <button type="submit">
+                        🔍
+                    </button>
+                </form>
+            </div>
+            </div>
+        </div>
+    </header>
+    <section class="container-fluid" layout:fragment="content"></section>
+    </body>
+    <footer class="main-footer">
+            <div class="footer-container"> 
+                <div class="col-logo">
+                    <a href="/">
+                        <div class="logo-text">
+                        <span class="char-m">G</span>
+                        <span class="char-o">I</span>
+                        <span class="char-w">A</span>
+                    </div>
+                    <div class="logo-text">
+                        <span class="char-m">B</span>
+                        <span class="char-o">Ả</span>
+                        <span class="char-w">O</span>
+                    </div>
+                    </a>
+                    <p class="intro-text">
+                    Đây là chỗ bán cây cảnh uy tín, có tâm nhất Sài Gòn.
+                    </p>
+                </div>
+                <div class="col-menu">
+                    <h3 class="footer-col-title">VỀ CHÚNG TÔI</h3>        
+                    <ul class="footer-link-list">
+                        <li><a href="/about" class="menu-link">Giới thiệu</a></li>
+                        <li><a href="/contact" class="menu-link">Liên hệ</a></li>
+                        <li><a href="/privacy-policy" class="menu-link">Chính sách bảo mật</a></li>
+                        <li><a href="/warranty-policy" class="menu-link">Chính sách bảo hành</a></li>
+                        <li><a href="/payment-method" class="menu-link">Phương thức thanh toán</a></li>
+                        <li><a href="/shipping-method" class="menu-link">Phương thức vận chuyển</a></li>
+                    </ul>
+                </div>
+                <div class="col-contact">
+                    <h3 class="footer-col-title">LIÊN HỆ</h3>
+                    <div class="contact-list">
+                        <div class="contact-item">
+                            <span>Hotline 1: 09 9999 9999</span>
+                        </div>
+                        <div class="contact-item">
+                            <span>Hotline 2: 0888 888 888</span>
+                        </div>
+                        <div class="contact-item">
+                            <span>Hotline 3: 077 777 7777</span>
+                        </div>
+                        <div class="contact-item">
+                            <a href="mailto:hotro@gmail.com">Email: hotro@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <span>Địa chỉ: 123 Lê Văn Sỹ, Quận Tân Bình, TP.HCM</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/" class="social-link" title="Facebook" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/" class="social-link" title="Instagram" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/" class="social-link" title="LinkedIn" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://www.youtube.com/" class="social-link" title="Youtube" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <section class="map-section">
+            <div class="map-container">
+                <h2 class="map-title">Hướng dẫn tới chỗ bán Cây Cảnh</h2>
+                <div class="map-wrapper">
+                    <iframe 
+                        class="map-iframe" 
+                        title="Vị trí MOW Garden trên Bản đồ"
+                        loading="lazy" 
+                        allowfullscreen 
+                        referrerpolicy="no-referrer-when-downgrade" 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.645620958117!2d106.608307!3d10.760778!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752e5050f83737%3A0x892a472c1c681944!2zMjU2IEJpbmggVGjhuqFuaCwgQk5oIEIsIFFuLiBCw6xuaCBUw6JuLCBUUC5IQ00!5e0!3m2!1svi!2sbd!4v1700620800000!5m2!1svi!2sbd">
+                    </iframe>
+                </div>
+            </div>
+            <div class="copyright-bar">
+                Copyright 2025 © HCMUNRE
+            </div>
+            <a href="https://chat.zalo.me/" class="floating-contact" target="_blank">
+                <i class="fas fa-comments"></i>
+                <span>Liên hệ</span>
+            </a>
+            </section>
+    </footer>
+    <div id="loginModal" class="modal-overlay">
+    <div class="modal-box">
+            <span class="close-btn">×</span>
+            
+            <div class="col-left">
+                <h2>ĐĂNG KÝ</h2>
+                <p>CHƯA CÓ TÀI KHOẢN? ĐĂNG KÝ NGAY!</p>
+                <a th:href="@{/register}" class="btn-register">ĐĂNG KÝ TÀI KHOẢN</a>
+            </div>
+            
+            <div class="col-right">
+                <h2>ĐĂNG NHẬP</h2>
+                <form th:action="@{/login}" method="post">
+                    
+                    <div class="error-msg" th:if="${param.error}">
+                        Sai email hoặc mật khẩu!
+                    </div>
+                    
+                    <label>Username or email *</label>
+                    <input type="text" name="username" required placeholder="Email" />
+                    
+                    <label>Mật khẩu *</label>
+                    <input type="password" name="password" id="loginPassword" required placeholder="Mật khẩu" />
+                    
+                    <div style="margin-top: 10px; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" id="chkShowPass" onclick="togglePassword()" 
+                            style="width: auto; height: auto; margin: 0; cursor: pointer;">
+                        <label for="chkShowPass" 
+                            style="font-size: 13px; margin: 0; cursor: pointer; user-select: none; color: #555;">
+                            Hiện mật khẩu
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-login">Đăng nhập</button>
+                </form>
+            </div>
+        </div>
+
+        <script>
+            function togglePassword() {
+                var passwordInput = document.getElementById("loginPassword");
+                var checkBox = document.getElementById("chkShowPass");
+                
+                if (checkBox.checked) {
+                    passwordInput.type = "text"; 
+                } else {
+                    passwordInput.type = "password"; 
+                }
+            }
+        </script>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var modal = document.getElementById("loginModal");
+            var closeBtn = document.querySelector(".close-btn");
+            document.body.addEventListener('click', function(event) {
+                if (event.target.id === 'header-login-btn' || event.target.closest('#header-login-btn')) {
+                    event.preventDefault(); 
+                    if(modal) modal.style.display = "flex";
+                }
+            });
+            if(closeBtn) {
+                closeBtn.onclick = function() { modal.style.display = "none"; }
+            }
+            window.onclick = function(event) {
+                if (event.target == modal) { modal.style.display = "none"; }
+            }
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('error')) {
+                if(modal) modal.style.display = "flex";
+            }
+        });
+    </script>
+    <script>
+    function addToCart(productId) {
+        fetch(`/cart/add-ajax/${productId}`)
+            .then(res => res.text())
+            .then(count => {
+                document.getElementById("cart-count").textContent = count;
+            })
+            .catch(err => console.error(err));
+    }
+    </script>
+    <script>
+        document.getElementById("openSearchBtn").addEventListener("click", () => {
+        document.getElementById("searchBox").style.display = "block";
+    });
+    </script>
+    <script>
+        function toggleAdminMenu() {
+            document.getElementById("adminMenu").classList.toggle("show");
+        }
+        window.addEventListener('click', function(event) {
+            if (!event.target.matches('.dropdown-trigger') && !event.target.closest('.dropdown-trigger')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        });
+    </script>
 </html>

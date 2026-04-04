@@ -1,85 +1,52 @@
 package ceb.controller;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import ceb.model.Users;
-import ceb.repository.UsersRepository;
+import ceb.repository.UserRepository;
 
 @Controller
 public class AuthController {
 
     @Autowired
-    private UsersRepository usersRepository;
+    private UserRepository repo;
 
-    // ---------- LOGIN FORM ----------
-    @GetMapping("/auth/login")
-    public String login() {
+    @Autowired
+    private PasswordEncoder encoder;
+
+    @GetMapping("/register")
+    public String showRegisterForm(Model model) {
+        model.addAttribute("user", new Users());
+        return "auth/register";
+    }
+
+    @GetMapping("/login")
+    public String showLoginForm( ) {
+   
         return "auth/login";
     }
 
-    // ---------- LOGIN FORM SUBMIT ----------
-    @PostMapping("/auth/login")
-    public String loginProcess(
-            @RequestParam String email,
-            @RequestParam String password) {
+    @PostMapping("/register")
+    public String register(Users user) {
+        user.setPassword(encoder.encode(user.getPassword()));
+        user.setEnabled(true);
 
-        // Kiểm tra email trong DB
-        Users user = usersRepository.findByEmailLegacy(email);
-        if (user == null) {
-            return "redirect:/auth/login?error=email";
+        if (user.getRole() == null) {
+            user.setRole("USER");
         }
 
-        // Hash mật khẩu người dùng nhập để đối chiếu
-        byte[] inputHash = Users.hashPassword(password);   // bạn cần hàm này trong model
-        byte[] dbHash = user.getPassword();
-
-        if (!java.util.Arrays.equals(inputHash, dbHash)) {
-            return "redirect:/auth/login?error=password";
-        }
-
-        return "redirect:/auth?success";
+        repo.save(user);
+        return "redirect:/login";
     }
 
-    // ---------- GOOGLE LOGIN CALLBACK ----------
-    @GetMapping("/auth/googleresponse")
-    public String googleResponse(@AuthenticationPrincipal OAuth2User oauthUser) {
+     @GetMapping("/error/403")
+    public String showError403() {
 
-        Map<String, Object> map = oauthUser.getAttributes();
-
-        String googleId = map.get("sub").toString();
-        String email = map.get("email").toString();
-        String givenName = map.get("given_name").toString();
-        String familyName = map.get("family_name").toString();
-        String fullName = map.get("name").toString();
-
-        // Gọi repository để lưu hoặc cập nhật người dùng Google
-        String role = usersRepository.saveOrUpdateGoogleUser(
-                googleId,
-                email,
-                givenName,
-                familyName,
-                fullName
-        );
-
-        // Điều hướng theo vai trò
-        if ("Admin".equals(role)) {
-            return "redirect:/admin/dashboard";
-        }
-
-        return "redirect:/auth?success";
-    }
-
-    // ---------- TRANG CHÍNH SAU LOGIN ----------
-    @GetMapping("/auth")
-    public String index() {
-        return "auth/index";
+        return "error/403";
     }
 }
+

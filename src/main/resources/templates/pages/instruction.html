@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{shared/layout}">
+<title layout:fragment="title">Hướng dẫn</title>
+<section layout:fragment="content">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+
+        /* --- BAO NGOÀI --- */
+        .guide-page-wrapper {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f9fbf9; /* Nền xanh rất nhạt */
+            padding: 50px 0;
+            color: #444;
+        }
+
+        .guide-main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 280px 1fr; /* Cột menu trái 280px, còn lại là nội dung */
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        /* --- TIÊU ĐỀ TRANG --- */
+        .guide-main-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .guide-main-header h1 {
+            color: #1b4332;
+            font-weight: 700;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        .guide-main-header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        /* --- MENU BÊN TRÁI --- */
+        .guide-sidebar-box {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        .guide-nav-item {
+            display: flex;
+            align-items: center;
+            padding: 18px 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            border-left: 4px solid transparent;
+            color: #555;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .guide-nav-item i {
+            width: 25px;
+            font-size: 18px;
+            margin-right: 10px;
+            color: #999;
+        }
+
+        .guide-nav-item:hover {
+            background-color: #f4f8f5;
+            color: #1b4332;
+        }
+
+        /* Menu đang chọn */
+        .guide-nav-item.active {
+            background-color: #e8f5e9;
+            color: #1b4332;
+            border-left-color: #1b4332;
+        }
+        .guide-nav-item.active i {
+            color: #1b4332;
+        }
+
+        /* --- NỘI DUNG BÊN PHẢI --- */
+        .guide-content-area {
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            min-height: 500px;
+        }
+
+        .guide-tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .guide-tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Style cho nội dung bài viết */
+        .guide-tab-content h2 {
+            color: #1b4332;
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e9;
+            text-align: left;
+        }
+
+        .guide-tab-content h3 {
+            color: #2d6a4f;
+            font-size: 18px;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .guide-tab-content p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+            color: #555;
+            text-align: justify;
+        }
+
+        .guide-tab-content ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        .guide-tab-content li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Highlight box */
+        .guide-note-box {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            color: #795548;
+            font-size: 14px;
+        }
+
+        /* Responsive Mobile */
+        @media (max-width: 768px) {
+            .guide-main-container {
+                grid-template-columns: 1fr;
+            }
+            .guide-sidebar-box {
+                display: flex;
+                overflow-x: auto;
+                white-space: nowrap;
+                position: static;
+                border-radius: 10px;
+                margin-bottom: 20px;
+            }
+            .guide-nav-item {
+                border-left: none;
+                border-bottom: 3px solid transparent;
+                padding: 15px;
+            }
+            .guide-nav-item.active {
+                border-left-color: transparent;
+                border-bottom-color: #1b4332;
+            }
+        }
+    </style>
+
+    <div class="guide-page-wrapper">
+        
+        <div class="guide-main-header">
+            <h1>Trung Tâm Trợ Giúp</h1>
+            <p>Mọi thông tin bạn cần để mua sắm và chăm sóc cây dễ dàng hơn</p>
+        </div>
+
+        <div class="guide-main-container">
+            
+            <div class="guide-sidebar-box">
+                <div class="guide-nav-item active" onclick="openTab(event, 'purchase')">
+                    <i class="fas fa-shopping-bag"></i> Hướng dẫn mua hàng
+                </div>
+                <div class="guide-nav-item" onclick="openTab(event, 'payment')">
+                    <i class="fas fa-credit-card"></i> Thanh toán & Vận chuyển
+                </div>
+                <div class="guide-nav-item" onclick="openTab(event, 'warranty')">
+                    <i class="fas fa-sync-alt"></i> Chính sách bảo hành
+                </div>
+                <div class="guide-nav-item" onclick="openTab(event, 'care')">
+                    <i class="fas fa-seedling"></i> Mẹo chăm sóc cây
+                </div>
+                <div class="guide-nav-item" onclick="openTab(event, 'contact')">
+                    <i class="fas fa-envelope"></i> Liên hệ hỗ trợ
+                </div>
+            </div>
+
+            <div class="guide-content-area">
+                
+                <div id="purchase" class="guide-tab-content active">
+                    <h2>Hướng Dẫn Mua Hàng</h2>
+                    <p>Chào mừng bạn đến với chúng tôi! Việc đặt mua một chậu cây xanh mát chưa bao giờ dễ dàng đến thế. Hãy làm theo các bước sau nhé:</p>
+                    
+                    <h3>Bước 1: Tìm kiếm sản phẩm</h3>
+                    <p>Bạn có thể duyệt qua danh mục <b>Cây trong nhà</b>, <b>Cây để bàn</b> hoặc sử dụng thanh tìm kiếm ở góc trên cùng để tìm loại cây yêu thích.</p>
+                    
+                    <h3>Bước 2: Thêm vào giỏ hàng</h3>
+                    <p>Tại trang chi tiết sản phẩm, chọn số lượng mong muốn và bấm nút <b>"Thêm vào giỏ hàng"</b>. Bạn có thể tiếp tục mua sắm hoặc bấm vào icon giỏ hàng để thanh toán.</p>
+                    
+                    <h3>Bước 3: Đặt hàng</h3>
+                    <p>Kiểm tra lại giỏ hàng, nhập thông tin địa chỉ giao hàng và số điện thoại chính xác. Sau đó bấm <b>"Xác nhận đặt hàng"</b>.</p>
+                    
+                    <div class="guide-note-box">
+                        <i class="fas fa-info-circle"></i> <b>Lưu ý:</b> Nếu bạn muốn tặng quà, hãy ghi chú lại lời nhắn, shop sẽ hỗ trợ viết thiệp miễn phí!
+                    </div>
+                </div>
+
+                <div id="payment" class="guide-tab-content">
+                    <h2>Thanh Toán & Vận Chuyển</h2>
+                    
+                    <h3>1. Phương thức thanh toán</h3>
+                    <ul>
+                        <li><b>COD:</b> Thanh toán tiền mặt khi nhận hàng.</li>
+                        <li><b>Chuyển khoản ngân hàng:</b> Qua VietQR, Momo (Nội dung: Tên + SĐT).</li>
+                    </ul>
+
+                    <h3>2. Phí vận chuyển</h3>
+                    <p>Vì cây cảnh là hàng cồng kềnh và dễ vỡ, phí ship sẽ được tính như sau:</p>
+                    <ul>
+                        <li><b>Nội thành TP.HCM:</b> 30.000đ (Freeship cho đơn > 500k).</li>
+                        <li><b>Ngoại thành:</b> 40.000đ - 50.000đ.</li>
+                        <li><b>Tỉnh thành khác:</b> Gửi xe khách hoặc bưu điện (đóng gói bảo đảm).</li>
+                    </ul>
+
+                    <h3>3. Quy cách đóng gói</h3>
+                    <p>Cây được bọc giấy mềm, cố định bầu đất bằng băng keo và đặt trong thùng carton 5 lớp cứng cáp. Đảm bảo cây đến tay bạn vẫn xanh tươi nguyên vẹn.</p>
+                </div>
+
+                <div id="warranty" class="guide-tab-content">
+                    <h2>Chính Sách Đổi Trả & Bảo Hành</h2>
+                    <p>Chúng tôi hiểu rằng mua cây online có thể khiến bạn lo lắng. Đừng lo, chúng tôi cam kết:</p>
+
+                    <h3>Điều kiện đổi trả</h3>
+                    <ul>
+                        <li>Cây bị gãy, héo, dập nát nghiêm trọng trong quá trình vận chuyển.</li>
+                        <li>Giao sai loại cây, sai kích thước hoặc chậu bị vỡ.</li>
+                    </ul>
+
+                    <h3>Thời gian xử lý</h3>
+                    <p>Vui lòng quay video khi mở hàng và liên hệ với shop trong vòng <b>24 giờ</b> kể từ khi nhận hàng để được hỗ trợ đổi mới 1-1 hoặc hoàn tiền 100%.</p>
+
+                    <div class="guide-note-box" style="background: #ffebee; border-color: #ef5350; color: #c62828;">
+                        <i class="fas fa-exclamation-triangle"></i> <b>Lưu ý:</b> Shop xin phép từ chối bảo hành nếu cây chết do khách hàng không tưới nước hoặc chăm sóc sai cách sau 24h nhận hàng.
+                    </div>
+                </div>
+
+                <div id="care" class="guide-tab-content">
+                    <h2>Mẹo Chăm Sóc Cây Cơ Bản</h2>
+                    <p>Để cây luôn xanh tốt, bạn chỉ cần nhớ quy tắc "3 Đủ":</p>
+
+                    <h3>1. Đủ Nước</h3>
+                    <p>Hầu hết cây trong nhà không cần tưới quá nhiều. Hãy dùng ngón tay ấn vào đất, nếu thấy khô thì mới tưới. Tưới đẫm nước và để ráo, không để nước đọng dưới đáy chậu gây thối rễ.</p>
+
+                    <h3>2. Đủ Sáng</h3>
+                    <p>Cây cần ánh sáng để quang hợp. Hãy đặt cây ở nơi có ánh sáng gián tiếp (gần cửa sổ, ban công có mái che). Thi thoảng mang cây ra phơi nắng sớm (7h-9h sáng).</p>
+
+                    <h3>3. Đủ Dinh Dưỡng</h3>
+                    <p>Bón phân chậm tan hoặc phân trùn quế mỗi 2-3 tháng/lần để cây có sức đề kháng và ra lá mới xanh mượt.</p>
+                </div>
+
+                <div id="contact" class="guide-tab-content">
+                    <h2>Liên Hệ Hỗ Trợ</h2>
+                    <p>Nếu bạn có bất kỳ thắc mắc nào khác, đừng ngần ngại liên hệ với chúng tôi:</p>
+                    
+                    <p><i class="fas fa-phone-alt" style="color: #1b4332; width: 20px;"></i> <b>Hotline/Zalo:</b> 0909.123.456</p>
+                    <p><i class="fas fa-envelope" style="color: #1b4332; width: 20px;"></i> <b>Email:</b> hotro@shopcayxanh.com</p>
+                    <p><i class="fas fa-map-marker-alt" style="color: #1b4332; width: 20px;"></i> <b>Địa chỉ:</b> 123 Đường Cây Xanh, Quận Bình Thạnh, TP.HCM</p>
+                    
+                    <h3 style="margin-top: 30px;">Giờ làm việc</h3>
+                    <p>Thứ 2 - Chủ Nhật: 8:00 - 21:00</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            // 1. Ẩn tất cả nội dung tab
+            var i, tabcontent, menuitems;
+            tabcontent = document.getElementsByClassName("guide-tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+
+            // 2. Bỏ class active ở tất cả menu
+            menuitems = document.getElementsByClassName("guide-nav-item");
+            for (i = 0; i < menuitems.length; i++) {
+                menuitems[i].className = menuitems[i].className.replace(" active", "");
+            }
+
+            // 3. Hiện tab được chọn và thêm class active cho menu đó
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.className += " active";
+        }
+    </script>
+
+</section>
+</html>

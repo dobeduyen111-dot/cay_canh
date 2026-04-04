@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"lang="en"layout:decorate="~{shared/layout}">
+<title layout:fragment="title">Sản phẩm</title>
+<section layout:fragment="content" class="home-content">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+        .home-content {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #fdfdfd; 
+            color: #444;
+            padding: 40px 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #2d6a4f; 
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .product-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); 
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .product-box {
+            background: #fff;
+            border-radius: 20px; 
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .product-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(45, 106, 79, 0.1);
+            border-color: #d8f3dc;
+        }
+        .product-box img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+        .product-box h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1b4332;
+            margin: 0 0 10px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .meta-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #666;
+            background: #f8fcf9;
+            padding: 5px;
+            border-radius: 8px;
+        }
+        .price-tag {
+            color: #2d6a4f;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .desc-text {
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            height: 38px;
+            line-height: 1.5;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: auto;
+        }
+        .btn-detail {
+            padding: 10px 15px;
+            border: 1px solid #2d6a4f;
+            color: #2d6a4f;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.3s;
+            flex: 1; 
+        }
+        .btn-detail:hover {
+            background: #e8f5e9;
+        }
+        .btn-cart {
+            padding: 10px 15px;
+            background: #d4a373; 
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            border: none;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            flex: 1.5; 
+        }
+        .btn-cart:hover {
+            background: #b08968;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(212, 163, 115, 0.4);
+        }
+    </style>
+    <h1>Tất cả sản phẩm</h1>
+    <div class="product-container">
+        <div th:each="p : ${list}" class="product-box">
+            <img th:src="@{'/images/' + ${p.image}}" alt="Ảnh sản phẩm">
+            <h3 th:text="${p.productName}"></h3>
+            <div class="meta-info">
+                <span class="price-tag" th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0, 'POINT') + ' VNĐ'}"></span>
+                <span style="color:#ddd">|</span>
+                <span>Kho: <b th:text="${p.stock}"></b></span>
+            </div>
+            <div class="desc-text" th:utext="${p.description}"></div>
+            <div class="action-buttons">
+                <a th:href="@{'/product/' + ${p.productId}}" class="btn-detail">
+                    Xem chi tiết
+                </a>
+                <a th:href="@{'/cart/add/' + ${p.productId}}" class="btn-cart">
+                    <i class="fas fa-shopping-cart"></i> Mua ngay
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+    function addToCart(id) {
+        fetch('/cart/add/' + id, {
+            headers: { "X-Requested-With": "XMLHttpRequest" }
+        })
+        .then(res => {
+            if (res.status === 401) {
+                window.location.href = "/login";
+                return;
+            }
+            return res.json();
+        })
+        .then(data => {
+            if (data) alert("Đã thêm vào giỏ hàng!");
+        });
+    }
+    </script>
+</section>
+</html>

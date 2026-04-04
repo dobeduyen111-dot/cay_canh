@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{shared/layout}">
+<title layout:fragment="title">Liên hệ</title>
+<section layout:fragment="content" class="home-content">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+        .home-content {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f7fcf7;
+            padding: 40px 20px;
+            color: #444;
+            min-height: 70vh;
+        }
+
+        .contact-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .contact-container h1 {
+            color: #1b4332;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        /* --- ĐÃ SỬA PHẦN NÀY ĐỂ CĂN GIỮA --- */
+        .contact-grid {
+            display: flex;            /* Đổi từ grid sang flex */
+            justify-content: center;  /* Căn giữa theo chiều ngang */
+            gap: 30px;
+            margin-top: 20px;
+        }
+        /* ----------------------------------- */
+
+        .info-card {
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f7fcf7;
+            border: 1px solid #e8f5e9;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .item-icon {
+            font-size: 20px;
+            color: #d4a373; /* Màu cam đất */
+            width: 30px;
+            text-align: center;
+        }
+        
+        .item-label {
+            font-weight: 600;
+            color: #2d6a4f;
+            font-size: 14px;
+        }
+        
+        .item-value {
+            font-size: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                flex-direction: column; /* Trên mobile thì xếp dọc */
+            }
+        }
+    </style>
+
+    <div class="contact-container">
+        <h1>🌿 Liên Hệ Với HCMUNRE</h1>
+        
+        <div class="contact-grid">
+            
+            <div style="max-width: 600px; width: 100%;">
+                <h3 style="text-align: center; color: #2d6a4f;">Thông tin liên hệ</h3>
+                <p style="margin-bottom: 30px; text-align: center;">
+                    Chúng tôi luôn sẵn lòng lắng nghe và phục vụ bạn. Đừng ngần ngại liên hệ qua các kênh dưới đây.
+                </p>
+                
+                <div class="info-card">
+                    <div class="info-item">
+                        <div class="item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <div class="item-label">Địa chỉ</div>
+                            <div class="item-value">123 Đường Cây Xanh, Phường Mầm Cây, Quận Thảo Mộc, TP. HCM</div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="item-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div>
+                            <div class="item-label">Điện thoại</div>
+                            <div class="item-value">0838 369 639 - 09 6668 9993</div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="item-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <div class="item-label">Email hỗ trợ</div>
+                            <div class="item-value">hotro@gmail.com</div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="item-icon"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <div class="item-label">Giờ mở cửa</div>
+                            <div class="item-value">Thứ Hai - Chủ Nhật: 08:30 - 22:00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</html>
