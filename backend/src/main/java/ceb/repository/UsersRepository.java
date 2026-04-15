@@ -8,13 +8,16 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import ceb.model.Users;
+import ceb.domain.entity.Users;
 
 @Repository
-public class UserRepository {
+public class UsersRepository {
 
     @Autowired
     private JdbcTemplate jdbc;
+
+    
+
 
     // Mapper chuyển đổi dữ liệu từ DB sang Object Users
     private final RowMapper<Users> userMapper = (rs, rowNum) -> {
@@ -80,7 +83,7 @@ public class UserRepository {
     }
 
     // 6. Lấy tất cả danh sách
-    public List<Users> findAll() {
+    public List<Users> findAlls() {
         return jdbc.query("SELECT * FROM Users", userMapper);
     }
 

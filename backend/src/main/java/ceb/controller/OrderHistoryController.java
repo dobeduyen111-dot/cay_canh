@@ -9,42 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ceb.model.Users;
-import ceb.service.OrderService;
+import ceb.domain.entity.Users;
 
 @RestController
 @RequestMapping("/api/user/orders")
 public class OrderHistoryController {
 
-    @Autowired
-    private OrderService orderService;
-
-    @GetMapping
-    public List<?> getMyOrders() {
-
-        Integer userId = getUserId();
-
-        if (userId == null) {
-            throw new RuntimeException("Chưa đăng nhập");
-        }
-
-        return orderService.getUserOrders(userId);
-    }
-
-    private Integer getUserId() {
-        try {
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-            if (auth == null || !auth.isAuthenticated()
-                    || "anonymousUser".equals(auth.getPrincipal())) {
-                return null;
-            }
-
-            Users user = (Users) auth.getPrincipal();
-            return user.getUserId();
-
-        } catch (Exception e) {
-            return null;
-        }
-    }
 }

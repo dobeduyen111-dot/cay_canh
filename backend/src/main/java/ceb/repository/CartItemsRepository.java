@@ -1,12 +1,15 @@
 package ceb.repository;
 
-import ceb.model.CartItem;
-import ceb.model.Products;
+
+import ceb.domain.model.Products;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
+import ceb.domain.model.CartItem;
 
 @Repository
 public class CartItemsRepository {

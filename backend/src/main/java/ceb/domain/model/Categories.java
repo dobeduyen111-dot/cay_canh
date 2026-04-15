@@ -1,4 +1,4 @@
-package ceb.model;
+package ceb.domain.model;
 
 public class Categories {
     private Integer CategoryId;

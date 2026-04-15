@@ -1,12 +1,13 @@
 package ceb.repository;
 
-import ceb.model.Categories;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import ceb.domain.model.Categories;
 
 @Repository
 public class CategoriesRepository {

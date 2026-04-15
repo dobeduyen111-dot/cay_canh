@@ -1,4 +1,4 @@
-package ceb.model;
+package ceb.domain.entity;
 
 import java.time.LocalDateTime;
 import java.util.Collection;

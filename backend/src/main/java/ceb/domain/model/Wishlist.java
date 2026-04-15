@@ -1,4 +1,4 @@
-package ceb.model;
+package ceb.domain.model;
 
 import java.util.Date;
 

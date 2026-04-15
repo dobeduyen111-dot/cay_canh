@@ -13,21 +13,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import ceb.model.Users;
 import ceb.repository.DashboardRepository;
 import ceb.repository.OrdersRepository;
-import ceb.repository.UserRepository;
-import ceb.service.OrderService;
+import ceb.repository.UsersRepository;
+
 
 @RestController
 @RequestMapping("/api/admin")
 public class AdminController {
 
+    
     @Autowired
-    private OrderService orderService;
-
-    @Autowired
-    private UserRepository userRepo;
+    private UsersRepository userRepo;
 
     @Autowired
     private OrdersRepository orderRepo;
@@ -44,21 +41,9 @@ public class AdminController {
         return data;
     }
 
-    @GetMapping("/users")
-    public List<Users> getUsers() {
-        return userRepo.findAll();
-    }
+    
 
-    @GetMapping("/orders")
-    public List<?> getOrders() {
-        return orderService.getAllOrders();
-    }
-
-    @PutMapping("/orders/{id}/status")
-    public String updateOrderStatus(@PathVariable int id, @RequestParam String status) {
-        orderService.updateOrderStatus(id, status);
-        return "Update thành công";
-    }
+  
 
     @PutMapping("/users/{id}/password")
     public String updateUserPassword(@PathVariable int id,

@@ -1,4 +1,4 @@
-package ceb.model;
+package ceb.domain.model;
 
 public class OrderItems {
     private int orderItemId;

@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ceb.model.Users;
-import ceb.repository.UserRepository;
+import ceb.domain.entity.Users;
+import ceb.repository.UsersRepository;
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
 
     @Autowired
-    private UserRepository repo;
+    private UsersRepository repo;
 
     @Autowired
     private PasswordEncoder encoder;
